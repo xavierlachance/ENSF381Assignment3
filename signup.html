@@ -38,66 +38,66 @@
                     Confirm Password:
                 </label>
                 <input type="password" id="pswConfirm" name="pswConfirm" title="Confirm Password" required>
-                <label for=Email>Email:</label>
+                <label for="Email">Email:</label>
                 <input type="text" id="Email" name="Email" title="Email" required>
-                <button type="submit" class="signup-btn" id="signup-btn">Signup</button>
+                <button type="submit" class="signupBtn" id="signupBtn">Signup</button>
             </form>
         </div>
     </div>
 
+    <div class="errorBox" id="errorBox"></div> <!-- Error box -->
     <footer class="footer">
         <p>&copy; 2024 Companyco. All rights reserved.</p>
     </footer>
     <script>
-        var password = mainField.getElementById("pswReg").value;
-        var username = mainField.getElementById("usrReg").value;
-        var confirmPassword = mainField.getElementById("pswConfirm").value;
-        var Email = mainField.getAnimations("Email").value;
-        var errorList = [];
+        document.addEventListener("DOMContentLoaded", function () {
+            var signupForm = document.querySelector(".registerForm");
 
-        signupForm.addEventListener("submit", function (event) {
-            if (!/^[a-zA-Z][a-zA-Z0-9_-]{2,19}$/.test(username)) {
-                errorList.push("Invalid username format.");
-            }
+            signupForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent the form from submitting
 
-            if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*()-_=+\[\]{}|;:'",.<>?/`~]/.test(password)) {
-                errorList.push("Invalid password format.");
-            }
+                var username = document.getElementById("usrReg").value;
+                var password = document.getElementById("pswReg").value;
+                var confirmPassword = document.getElementById("pswConfirm").value;
+                var email = document.getElementById("Email").value;
+                var errorList = [];
 
-            if (password !== confirmPassword) {
-                errorList.push("Passwords do not match.");
-            }
+                if (!/^[a-zA-Z][a-zA-Z0-9_-]{2,19}$/.test(username)) {
+                    errorList.push("Invalid username format.");
+                }
 
-            if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-                errorList.push("Invalid email format.");
-            }
+                if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*()-_=+\[\]{}|;:'",.<>?/`~]/.test(password)) {
+                    errorList.push("Invalid password format.");
+                }
 
-        });
+                if (password !== confirmPassword) {
+                    errorList.push("Passwords do not match.");
+                }
 
-        function showMessage(erMsg) {
-            let errorBox = mainField.getElementById('message-box');
+                if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                    errorList.push("Invalid email format.");
+                }
 
-            if (!errorBox) {
-                errorBox = mainField.createElement('div');
-                errorBox.id = 'message-box';
-                mainField.querySelector('main').appendChild(errorBox);
+                showMessage(errorList);
+            });
 
-                errorBox.style.backgroundColor = '#f9f9f9';
+            function showMessage(errMsg) {
+                var errorBox = document.getElementById('errorBox');
+
+                errorBox.innerHTML = '';
                 errorBox.style.border = '2px';
-                errorBox.style.margin = '20px';
+                errorBox.style.backgroundColor = '#f9f9f9';
                 errorBox.style.padding = '10px';
+                errorBox.style.margin= '20px';
+                errorBox.style.width= 'auto';
+                for (var i = 0; i < errMsg.length; i++) {
+                    var messageText = document.createElement('p');
+                    messageText.textContent = errMsg[i];
+                    errorBox.appendChild(messageText);
+                }
             }
-
-            errorBox.innerHTML = '';
-
-            for (let i = 0; i < message.length; i++) {
-                const messageText = mainField.createElement('p');
-                messageText.textContent = erMsg[i];
-                errorBox.appendChild(messageText);
-            }
-        }
+        });
     </script>
-
 </body>
 
 </html>

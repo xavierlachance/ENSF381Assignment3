@@ -211,39 +211,34 @@ form input {
 
 .flexContainer-reg {
     display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 20px;
     padding: 20px;
     flex-wrap: wrap;
     height: 100%;
+    flex-direction: column;
 }
-
+/*signup page styles*/
 .mainField {
     border-radius: 5px;
     background-color: #ddd;
-    width:90%;
     padding: 10px;
-    margin: 10px;
-}
-.checkBox {
-    border-radius: 10px;
-    background-color: #f9f9f9;
-    width:90%;
-}
-.passwordP {
-    padding:10px;
-}
-.passwordC {
-    padding: 10px;
-}
-.usernameP {
-    padding: 10px
-}
-.EmailP {
-    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    width:auto;
 }
 .registerForm {
     align-items: center;
     text-align: center;
+    justify-content: space-between;
+}
+.signupBtn{
+    background-color: #4CAF50;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    opacity: 0.5;
+}
+.signupBtn:hover {
+    background-color: #45A049;
+    opacity: 1;
 }
