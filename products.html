@@ -9,7 +9,7 @@
 
     <title>Products - ShopifyCo</title>
 </head>
-<body>
+<body class="product-page">
     <!-- Header Section -->
     <header class="header">
         <div class="logo">
@@ -29,7 +29,7 @@
     </nav>
     
     <main>
-        <section class="product-list">
+        <cart-section class="product-list">
 
             <!-- Display Product 1 and Product 2 in the same line -->
             <div class="product-container">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <!-- Similarly create Product 5-8 -->
-        </section>
+        </cart-section>
     </main>
     
     <footer class="footer">
@@ -71,3 +71,123 @@
     </footer>
 </body>
 </html>
+<script>
+    /* Note, AI was used to help construct this as I ran into so many issues, especially with the stupid remove button,
+    as I think the way I approached adding the implementation of the button originally was right but not the matching the appearance of the gif.
+    The implementation is almost identical except I originally created p instead of div for each attribute and appended them.
+    */
+
+    const products = [];
+
+    // Retrieve product data from HTML
+    const productElements = document.querySelectorAll('.product');
+    productElements.forEach((element) => {
+        const name = element.querySelector('h2').textContent;
+        const price = element.querySelector('.price').textContent;
+        products.push({ name, price });
+    });
+
+    const addToCartButtons = document.querySelectorAll('.product button');
+    let cart = [];
+
+    // Will add event listener to each button
+    addToCartButtons.forEach((button, index) => {
+        button.addEventListener('click', () => addToCart(index));
+    });
+
+    // Checks if item exists, if not, pushes item and quantity
+    function addToCart(index) {
+        const product = products[index];
+        const existingProduct = cart.find(item => item.name === product.name);
+
+        if (existingProduct) {
+            existingProduct.quantity++;
+        } else {
+            cart.push({ ...product, quantity: 1 });
+        }
+
+        alert(product.name + " has been added to the cart.");
+
+        updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+    const cartItemsContainer = document.querySelector('.cart-items');
+    cartItemsContainer.innerHTML = ''; // Clear the container before updating
+
+    cart.forEach(item => {
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+
+        const itemDetails = document.createElement('div');
+        itemDetails.textContent = `${item.name} - ${item.price} - Quantity: ${item.quantity}`;
+        itemDetails.style.display = 'inline-block';
+
+        cartItem.appendChild(itemDetails);
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        // Added styles for the remove button as per documentation
+        removeButton.style.backgroundColor = '#aaa';
+        removeButton.style.color = 'white';
+        removeButton.style.padding = '10px';
+        removeButton.style.border = 'none';
+        removeButton.style.borderRadius = '5px';
+        removeButton.style.marginLeft = '10px';
+
+        removeButton.addEventListener('click', () => removeItem(item.name));
+        removeButton.addEventListener('mouseover', changeButtonColor);
+        removeButton.addEventListener('mouseout', resetButtonColor);
+        cartItem.appendChild(removeButton);
+
+        // Append the cartItem to the same line
+        cartItemsContainer.appendChild(cartItem);
+    });
+}
+
+
+
+    function removeItem(name) {
+        const cartItem = cart.find(item => item.name === name);
+
+        if (cartItem) {
+            cartItem.quantity--;
+
+            if (cartItem.quantity === 0) {
+                const itemIndex = cart.indexOf(cartItem);
+                cart.splice(itemIndex, 1);
+            }
+
+            updateCartDisplay();
+        }
+    }
+
+    function changeButtonColor(event) {
+        let button = event.target;
+        button.style.backgroundColor = '#ff0000';
+    }
+
+    function resetButtonColor(event) {
+        let button = event.target;
+        button.style.backgroundColor = '#aaa';
+        button.style.color = 'white';
+        button.style.padding = '10px';
+        button.style.border = 'none';
+        button.style.borderRadius = '5px';
+        button.style.marginLeft = '10px';
+    }
+
+    const cartSection = document.createElement('div');
+    cartSection.classList.add('cart-section');
+    cartSection.style.textAlign = 'center';
+
+    const cartTitle = document.createElement('h2');
+    cartTitle.textContent = 'Shopping Cart';
+    cartSection.appendChild(cartTitle);
+
+    const cartItemsContainer = document.createElement('div');
+    cartItemsContainer.classList.add('cart-items');
+    cartSection.appendChild(cartItemsContainer);
+
+    document.body.insertBefore(cartSection, document.querySelector('.footer'));
+</script>
