@@ -1,142 +1,103 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css">
-        <title>Register - CompanyCo</title>
-    </head>
-    <body>
-        <header class="header">
-            <div class="logo">
-                <img src="logo.png" alt="Company Logo">
-            </div>
-            <div class="company-name">
-                XTC
-            </div>
-        </header>   
-        <nav>
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-            <a href="login.html" class="nav-link">Login</a> 
-        </nav> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Register - CompanyCo</title>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <div class="company-name">
+            XTC
+        </div>
+    </header>
+    <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link">Login</a>
+    </nav>
     <div class="flexContainer-reg">
-        <div class = "mainField">
-            <form action="">
+        <div class="mainField">
+            <form action="" , class="registerForm">
                 <label for="first">
                     Username:
                 </label>
-                <input type="text"
-                    id="usrReg"
-                    name="usrReg"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*-)(?=.*_).{8,}"
-                    title="Username" required>
-        
+                <input type="text" id="usrReg" name="usrReg" title="Username" required>
                 <label for="pswReg">
                     Password:
                 </label>
-                <input type="password"
-                    id="pswReg"
-                    name="pswReg"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Password" required>
+                <input type="password" id="pswReg" name="pswReg" title="Password" required>
                 <label for="pswConfirm">
                     Confirm Password:
                 </label>
-                <input type="password"
-                    id="pswConfirm"
-                    name="pswConfirm"
-                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                    title="Confirm Password" required>
-                <label for = Email>
-                    Email:
-                </label>
-                <input type="text"
-                id="Email"
-                name="Email"
-                title="Email" required>
-                <div class="nowrap">
-                    <button type="Signup"
-                            onclick="solve()">
-                        Submit
-                    </button>
-                </div>
+                <input type="password" id="pswConfirm" name="pswConfirm" title="Confirm Password" required>
+                <label for=Email>Email:</label>
+                <input type="text" id="Email" name="Email" title="Email" required>
+                <button type="submit" class="signup-btn" id="signup-btn">Signup</button>
             </form>
-            </div>
-            <div class = "checkBox">
-                <div class = passwordP>
-                    <text>
-                        Check The Password
-                    </text>
-                </div>
-                <div class = passwordC>
-                    <text>
-                        Passwords dont Match
-                    </text>
-                </div>
-                <div class = usernameP>
-                    <text>
-                        Check The Username
-                    </text>
-                </div>
-                <div class = EmailP>
-                    <text>
-                        Check The Email
-                    </text>
-                </div>
         </div>
     </div>
-    
+
     <footer class="footer">
         <p>&copy; 2024 Companyco. All rights reserved.</p>
     </footer>
     <script>
-        var pswReg = document.getElementById("pswReg");
-        var validPsw = document.getElementById("");
+        var password = mainField.getElementById("pswReg").value;
+        var username = mainField.getElementById("usrReg").value;
+        var confirmPassword = mainField.getElementById("pswConfirm").value;
+        var Email = mainField.getAnimations("Email").value;
+        var errorList = [];
 
-        var usrReg = document.getElementById("usrReg");
-        var valid = false;
-
-        function solve(){
-            var lowerCaseLetters = /[a-z]/g;
-            if(pswReg.value.match(lowerCaseLetters)) {
-                valid = true;
-            } else {
-                valid = false;
+        signupForm.addEventListener("submit", function (event) {
+            if (!/^[a-zA-Z][a-zA-Z0-9_-]{2,19}$/.test(username)) {
+                errorList.push("Invalid username format.");
             }
 
-            var upperCaseLetters = /[A-Z]/g;
-            if(pswReg.value.match(upperCaseLetters)) {
-                valid = true
-            } else {
-                valid = false
+            if (password.length < 8 || !/[a-z]/.test(password) || !/[A-Z]/.test(password) || !/\d/.test(password) || !/[!@#$%^&*()-_=+\[\]{}|;:'",.<>?/`~]/.test(password)) {
+                errorList.push("Invalid password format.");
             }
 
-            var numbers = /[0-9]/g;
-            if(pswReg.value.match(numbers)) {
-                valid = true
-            } else {
-                valid = false
+            if (password !== confirmPassword) {
+                errorList.push("Passwords do not match.");
             }
 
-            if(pswReg.value.length >= 8) {
-                valid = true
-            } else {
-                valid = false
+            if (!/^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                errorList.push("Invalid email format.");
             }
 
-            var specialChars = /_/g;
-            if() {
-                valid = true
-            } else {
-                valid = false
+        });
+
+        function showMessage(erMsg) {
+            let errorBox = mainField.getElementById('message-box');
+
+            if (!errorBox) {
+                errorBox = mainField.createElement('div');
+                errorBox.id = 'message-box';
+                mainField.querySelector('main').appendChild(errorBox);
+
+                errorBox.style.backgroundColor = '#f9f9f9';
+                errorBox.style.border = '2px';
+                errorBox.style.margin = '20px';
+                errorBox.style.padding = '10px';
+            }
+
+            errorBox.innerHTML = '';
+
+            for (let i = 0; i < message.length; i++) {
+                const messageText = mainField.createElement('p');
+                messageText.textContent = erMsg[i];
+                errorBox.appendChild(messageText);
             }
         }
+    </script>
 
-
-        </script>
-        
 </body>
- 
+
 </html>

@@ -234,5 +234,16 @@ form input {
 .passwordP {
     padding:10px;
 }
-.passwordC
-
+.passwordC {
+    padding: 10px;
+}
+.usernameP {
+    padding: 10px
+}
+.EmailP {
+    padding: 10px;
+}
+.registerForm {
+    align-items: center;
+    text-align: center;
+}
