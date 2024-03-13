@@ -222,28 +222,66 @@ form input {
     height: 100%;
     flex-direction: column;
 }
-/*signup page styles*/
-.mainField {
-    border-radius: 5px;
-    background-color: #ddd;
-    padding: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width:auto;
-}
-.registerForm {
+
+/* Signup Form Section */
+.flexContainer-reg {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    justify-content: space-between;
+    background-color: #ddd;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
 }
-.signupBtn{
+
+/* Form Fields */
+.registerForm label {
+    display: block;
+    margin: 10px;
+}
+
+.registerForm input[type="text"],
+.registerForm input[type="password"] {
+    background-color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+.registerForm input::placeholder {
+    color: #999; /* Placeholder text color */
+}
+
+/* Signup Button */
+.signupBtn {
     background-color: #4CAF50;
     padding: 10px;
     border-radius: 5px;
     margin: 10px;
     opacity: 0.5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
 }
+
 .signupBtn:hover {
     background-color: #45A049;
-    opacity: 1;
+    opacity: 1.0;
 }
+
+.email-group {
+    display: flex;
+    align-items: center;
+}
+
+.email-group input[type="text"] {
+    margin-right: 10px; /* Adjust spacing between email input and button */
+}
+
+/* This is to make the signup button centered, as it looks a lot cleaner than beside the email box
+.button-container {
+    display: flex;
+    justify-content: center;
+} 
+*/

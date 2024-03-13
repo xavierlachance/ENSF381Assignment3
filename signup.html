@@ -25,22 +25,18 @@
     </nav>
     <div class="flexContainer-reg">
         <div class="mainField">
-            <form action="" , class="registerForm">
-                <label for="first">
-                    Username:
-                </label>
+            <form action="" class="registerForm">
+                <label for="first">Username:</label>
                 <input type="text" id="usrReg" name="usrReg" title="Username" required>
-                <label for="pswReg">
-                    Password:
-                </label>
+                <label for="pswReg">Password:</label>
                 <input type="password" id="pswReg" name="pswReg" title="Password" required>
-                <label for="pswConfirm">
-                    Confirm Password:
-                </label>
+                <label for="pswConfirm">Confirm Password:</label>
                 <input type="password" id="pswConfirm" name="pswConfirm" title="Confirm Password" required>
                 <label for="Email">Email:</label>
-                <input type="text" id="Email" name="Email" title="Email" required>
-                <button type="submit" class="signupBtn" id="signupBtn">Signup</button>
+                <div class="email-group">
+                    <input type="text" id="Email" name="Email" title="Email" required>
+                    <button type="submit" class="signupBtn" id="signupBtn">Signup</button>
+                </div>
             </form>
         </div>
     </div>
